@@ -21,7 +21,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron-start": "electron ."
+    "electron-start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "eslintConfig": {
     "extends": [
@@ -42,7 +44,31 @@
     ]
   },
   "devDependencies": {
-    "electron": "^28.1.0"
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1"
   },
-  "main": "main.js"
+  "main": "main.js",
+  "build": {
+    "appId": "com.netlify.pixel-clicker",
+    "mac": {
+      "category": "public.app-category.software"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "public/icon.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "main.js",
+      "package.json",
+      "resources/app.exe"
+    ]
+  }
 }

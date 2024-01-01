@@ -9,6 +9,10 @@ const App = () => {
     const response = await fetch("http://localhost:5000/message");
     const data = await response.json();
     setMessage(data.message);
+
+    setTimeout(() => {
+      setMessage("");
+    }, 3000);
   };
 
   return (
