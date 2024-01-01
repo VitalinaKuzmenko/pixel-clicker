@@ -6,13 +6,21 @@ const App = () => {
   const [message, setMessage] = useState("");
 
   const handleClick = async () => {
-    const response = await fetch("http://localhost:5000/message");
-    const data = await response.json();
-    setMessage(data.message);
+    try {
+      const response = await fetch("http://localhost:5000/message");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
 
-    setTimeout(() => {
-      setMessage("");
-    }, 3000);
+      setMessage(data.message);
+      console.log("data", data);
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
   };
 
   return (
