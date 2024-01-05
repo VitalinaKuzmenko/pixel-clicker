@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
+const url = require("url");
 const { spawn } = require("child_process");
 
 let mainWindow;
@@ -25,7 +26,15 @@ const createWindow = () => {
   });
 
   // Load your React frontend
-  mainWindow.loadURL("http://localhost:3000"); // Adjust if your React dev server is running on a different port
+  // mainWindow.loadFile(path.join(__dirname, "build/index.html"));
+
+  const startUrl = url.format({
+    pathname: path.join(__dirname, "build/index.html"),
+    protocol: "file:",
+    slashes: true,
+  });
+
+  mainWindow.loadURL(startUrl);
 };
 
 app.whenReady().then(() => {
